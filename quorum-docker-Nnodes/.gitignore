@@ -1,0 +1,9 @@
+.#*
+Nnodes/qdata_*
+Nnodes/contract_pri.js
+Nnodes/contract_pub.js
+Nnodes/docker-compose.yml
+Nnodes/static-nodes.json
+
+# Mac OS custom attributes file
+.DS_Store

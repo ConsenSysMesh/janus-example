@@ -1,0 +1,6 @@
+.#*
+JNnodes/jdata_*
+JNnodes/docker-compose.yml
+
+# Mac OS custom attributes file
+.DS_Store

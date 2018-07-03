@@ -1,0 +1,23 @@
+{
+  "name": "janus-example",
+  "version": "0.0.1",
+  "description": "Example application to demonstrate Janus",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "Janus",
+    "HDWallet",
+    "Indirection",
+    "Privacy"
+  ],
+  "author": "Consensys",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "guid-typescript": "^1.0.7",
+    "janus": "file:../janus",
+    "lodash": "^4.17.10",
+    "web3": "^0.20.1"
+  }
+}
