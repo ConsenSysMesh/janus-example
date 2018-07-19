@@ -8,10 +8,9 @@ set -u
 set -e
 
 ### Configuration Options
-JanusCONF=/jdata/janusconf.json
+#JanusCONF=/config/janusconfig.json
+export CONFIG_PATH=/config
 
-echo "Starting hdwallet"
-cd ../janus-client
-
-#node index.js
+echo "Starting janus-service"
+cd ../janus-service
 npm start

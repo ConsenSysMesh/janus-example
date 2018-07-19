@@ -17,7 +17,7 @@ network="nnodes_janus_net"
 #subnet="10.0.0.0/24"
 ips=("10.0.0.2" "10.0.0.3" "10.0.0.4")
 nodeIps=("10.0.0.11" "10.0.0.12" "10.0.0.13")
-companyNames=("Bob_comp" "Alise_comp" "Tom Comp")
+companyNames=("Bob_comp" "Alise_comp" "Tom_comp")
 networkId=1
 # Docker image name
 image=janus-client
@@ -46,7 +46,7 @@ echo '[1] Configuring for '$ninstance' instances.'
 n=1
 for ip in ${ips[*]}
 do
-    qd=jdata_$n
+    qd=config_$n
     mkdir -p $qd
 
     let n++
@@ -104,7 +104,7 @@ echo '[3] Creating config files'
 n=1
 for ip in ${ips[*]}
 do
-    qd=jdata_$n
+    qd=config_$n
 
     #cp templates/janusconfig.json $qd/janusconfig.json
     cat templates/janusconfig.json \
@@ -116,6 +116,9 @@ do
 
     cp templates/start.sh $qd/start.sh
     chmod 755 $qd/start.sh
+
+    cp templates/serviceconfig.yml $qd/serviceconfig.yml
+    chmod 755 $qd/serviceconfig.yml
 
     cp directory.json $qd/directory.json
     chmod 755 $qd/directory.json
@@ -137,18 +140,18 @@ EOF
 n=1
 for ip in ${ips[*]}
 do
-    qd=jdata_$n
+    qd=config_$n
 
     cat >> docker-compose.yml <<EOF
-  janus-client_$n:
+  janus-service_$n:
     image: $image
     volumes:
-      - './$qd:/jdata'
+      - './$qd:/config'
     networks:
       $network:
         ipv4_address: '$ip'
     ports:
-      - "$((n+4000)):4000"
+      - "$((n+10000)):10000"
 EOF
 
     let n++

@@ -1,5 +1,5 @@
 .#*
-JNnodes/jdata_*
+JNnodes/config_*
 JNnodes/docker-compose.yml
 
 # Mac OS custom attributes file
