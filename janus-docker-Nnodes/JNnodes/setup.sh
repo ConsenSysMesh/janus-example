@@ -18,9 +18,13 @@ network="nnodes_janus_net"
 ips=("10.0.0.2" "10.0.0.3" "10.0.0.4")
 nodeIps=("10.0.0.11" "10.0.0.12" "10.0.0.13")
 companyNames=("Bob_comp" "Alise_comp" "Tom_comp")
+mnemonics=("buyer try humor into improve thrive fruit funny skate velvet vanish live" 
+"radar blur cabbage chef fix engine embark joy scheme fiction master release" 
+"volume roast script mind garbage embark lizard utility else blur year dentist")
 networkId=1
 # Docker image name
 image=janus-client
+quorumImage=quorum
 
 ########################################################################
 
@@ -61,6 +65,8 @@ cat > directory.json <<EOF
 {
 EOF
 
+password=qwertyui
+
 n=1
 for ip in ${ips[*]}
 do
@@ -74,7 +80,10 @@ do
     resp=`docker exec -it nnodes_node_${n}_1 geth --exec "shh.getPublicKey('$ShhKeyId')" attach /qdata/dd/geth.ipc`
     ShhKey=${resp:6:132}
     echo $ShhKey
+
+    #account=`docker exec -it nnodes_node_${n}_1 geth --exec "personal.newAccount('$password) attach /qdata/dd/geth.ipc`
     
+
 cat >> directory.json <<EOF
     "${companyNames[$((n-1))]}": {
         "shhKeyId": "$ShhKeyId",
@@ -111,6 +120,7 @@ do
         | sed s/_nodeIp_/${nodeIps[$((n-1))]}/g \
         | sed s/_networkId_/$networkId/g \
         | sed s/_companyName_/${companyNames[$((n-1))]}/g \
+        | sed s/_mnemonic_/${mnemonics[$((n-1))]}/g \
                 > $qd/janusconfig.json
     chmod 755 $qd/janusconfig.json
 
@@ -150,6 +160,8 @@ do
     networks:
       $network:
         ipv4_address: '$ip'
+    environment:
+      - shhkeyPass: '$password'
     ports:
       - "$((n+10000)):10000"
 EOF
