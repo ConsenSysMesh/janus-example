@@ -114,13 +114,12 @@ n=1
 for ip in ${ips[*]}
 do
     qd=config_$n
-
     #cp templates/janusconfig.json $qd/janusconfig.json
     cat templates/janusconfig.json \
         | sed s/_nodeIp_/${nodeIps[$((n-1))]}/g \
         | sed s/_networkId_/$networkId/g \
         | sed s/_companyName_/${companyNames[$((n-1))]}/g \
-        | sed s/_mnemonic_/${mnemonics[$((n-1))]}/g \
+        | sed "s/_mnemonic_/${mnemonics[$((n-1))]}/g" \
                 > $qd/janusconfig.json
     chmod 755 $qd/janusconfig.json
 
