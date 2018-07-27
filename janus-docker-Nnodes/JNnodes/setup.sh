@@ -160,7 +160,7 @@ do
       $network:
         ipv4_address: '$ip'
     environment:
-      - shhkeyPass: '$password'
+      - shhkeyPass='$password'
     ports:
       - "$((n+10000)):10000"
 EOF
