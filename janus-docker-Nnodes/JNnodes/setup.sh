@@ -70,23 +70,24 @@ password=qwertyui
 n=1
 for ip in ${ips[*]}
 do
-    qd=qdata_$n
+    qd=config_$n
 
-    # Generate an shh key for the node
-    resp=`docker exec -it nnodes_node_${n}_1 geth --exec "shh.newKeyPair()" attach /qdata/dd/geth.ipc`
-    ShhKeyId=${resp:6:64}
-    echo $ShhKeyId
+    # # Generate an shh key for the node
+    # resp=`docker exec -it nnodes_node_${n}_1 geth --exec "shh.newKeyPair()" attach /qdata/dd/geth.ipc`
+    # ShhKeyId=${resp:6:64}
+    # echo $ShhKeyId
 
-    resp=`docker exec -it nnodes_node_${n}_1 geth --exec "shh.getPublicKey('$ShhKeyId')" attach /qdata/dd/geth.ipc`
-    ShhKey=${resp:6:132}
-    echo $ShhKey
+    # resp=`docker exec -it nnodes_node_${n}_1 geth --exec "shh.getPublicKey('$ShhKeyId')" attach /qdata/dd/geth.ipc`
+    # ShhKey=${resp:6:132}
+    # echo $ShhKey
 
     #account=`docker exec -it nnodes_node_${n}_1 geth --exec "personal.newAccount('$password) attach /qdata/dd/geth.ipc`
-    
+    resp=`docker run -v $pwd/$qd:/config --network=$network $image node /janus-client/shh_key_generator.js --password $password --nodeUrl http://10.0.0.11:8545`
+    ShhKey=${resp:0:132}
+    echo $resp
 
 cat >> directory.json <<EOF
     "${companyNames[$((n-1))]}": {
-        "shhKeyId": "$ShhKeyId",
         "shhKey": "$ShhKey"
 EOF
 if [[ $ninstance = $n ]]
@@ -160,7 +161,7 @@ do
       $network:
         ipv4_address: '$ip'
     environment:
-      - shhkeyPass='$password'
+      - shhkeyPass=$password
     ports:
       - "$((n+10000)):10000"
 EOF

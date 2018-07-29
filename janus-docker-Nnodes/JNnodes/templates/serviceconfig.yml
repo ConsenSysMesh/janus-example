@@ -7,11 +7,11 @@ services:
   message_provider_janus:
     class: ../janus-service/node_modules/janus/build/services/shh-message-provider
     calls:
-      - { method: 'init', arguments: ['@directory_provider','shhKeyId'] }
+      - { method: 'init', arguments: ['@directory_provider','/config/shh_keystore'] }
   message_provider_wallet:
     class: ../janus-service/node_modules/janus/build/services/shh-message-provider
     calls:
-      - { method: 'init', arguments: ['@directory_provider','shhKeyId'] }
+      - { method: 'init', arguments: ['@directory_provider','/config/shh_keystore'] }
   signer:
     class: ../janus-service/node_modules/janus/build/services/simple-signer
     arguments: ['0x6281cbb32d9b47407932af4214c9aa75e37bb8c58dbdde82b31745ed89ea3f13']
