@@ -17,7 +17,7 @@ network="nnodes_janus_net"
 #subnet="10.0.0.0/24"
 ips=("10.0.0.2" "10.0.0.3" "10.0.0.4")
 nodeIps=("10.0.0.11" "10.0.0.12" "10.0.0.13")
-companyNames=("Bob_comp" "Alise_comp" "Tom_comp")
+companyNames=("Bob_comp" "Alice_comp" "Tom_comp")
 mnemonics=("buyer try humor into improve thrive fruit funny skate velvet vanish live" 
 "radar blur cabbage chef fix engine embark joy scheme fiction master release" 
 "volume roast script mind garbage embark lizard utility else blur year dentist")
