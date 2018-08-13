@@ -1,17 +1,17 @@
 services:
   storage_provider:
-    class: ../janus-service/node_modules/janus/build/services/file-storage-provider
+    class: ../janus-client/node_modules/eth-janus/build/services/file-storage-provider
   directory_provider:
-    class: ../janus-service/node_modules/janus/build/services/file-directory-provider
+    class: ../janus-client/node_modules/eth-janus/build/services/file-directory-provider
     arguments: ['/config/directory.json' ]
   message_provider_janus:
-    class: ../janus-service/node_modules/janus/build/services/shh-message-provider
+    class: ../janus-client/node_modules/eth-janus/build/services/shh-message-provider
     calls:
       - { method: 'init', arguments: ['@directory_provider','/config/shh_keystore'] }
   message_provider_wallet:
-    class: ../janus-service/node_modules/janus/build/services/shh-message-provider
+    class: ../janus-client/node_modules/eth-janus/build/services/shh-message-provider
     calls:
       - { method: 'init', arguments: ['@directory_provider','/config/shh_keystore'] }
   signer:
-    class: ../janus-service/node_modules/janus/build/services/simple-signer
+    class: ../janus-client/node_modules/eth-janus/build/services/simple-signer
     arguments: ['0x6281cbb32d9b47407932af4214c9aa75e37bb8c58dbdde82b31745ed89ea3f13']

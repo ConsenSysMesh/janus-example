@@ -16,9 +16,10 @@
   "devDependencies": {},
   "dependencies": {
     "command-line-args": "^5.0.2",
+    "eth-janus": "0.0.1",
+    "eth-janus-service": "0.0.1",
     "ethers": "^3.0.26",
     "guid-typescript": "^1.0.7",
-    "janus": "file:../../janus",
     "lodash": "^4.17.10",
     "web3": "^0.20.1"
   }

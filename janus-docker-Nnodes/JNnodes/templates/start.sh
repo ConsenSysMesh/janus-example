@@ -12,5 +12,7 @@ set -e
 export CONFIG_PATH=/config
 
 echo "Starting janus-service"
-cd ../janus-service
+#cd ../janus-service
+cd janus-client/node_modules/eth-janus-service
+
 npm start
